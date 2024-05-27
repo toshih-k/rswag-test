@@ -1,0 +1,9 @@
+services:
+  backend:
+    build: .
+    volumes:
+      - ./:/rails:rw
+    ports:
+      - 3000:3000
+    environment:
+      RAILS_ENV: development
