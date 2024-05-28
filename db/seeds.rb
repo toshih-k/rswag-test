@@ -9,4 +9,4 @@
 #   end
 school_admin_user = FactoryBot.create(:user)
 school = FactoryBot.create(:school)
-FactoryBot.create(:user_school_admin, school_id: school.id, user_id: user.id)
+FactoryBot.create(:user_school_admin, school_id: school.id, user_id: school_admin_user.id)
