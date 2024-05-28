@@ -1,16 +1,15 @@
 # == Schema Information
 #
-# Table name: users
+# Table name: user_school_admins
 #
 #  id         :integer          not null, primary key
-#  name       :string           not null
-#  email      :string           not null
+#  user_id    :integer
+#  school_id  :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 FactoryBot.define do
-  factory :user do
-    name { '東音花子' }
-    email { 'to-on@example.com' }
+  factory :user_school_admin do
+    
   end
 end

@@ -7,4 +7,6 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
-FactoryBot.create(:user)
+school_admin_user = FactoryBot.create(:user)
+school = FactoryBot.create(:school)
+FactoryBot.create(:user_school_admin, school_id: school.id, user_id: user.id)

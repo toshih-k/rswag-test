@@ -4,28 +4,294 @@ info:
   title: API V1
   version: v1
 paths:
-  "/api/v1/users":
+  "/api/v1/schools":
     get:
-      summary: get user list
+      summary: 教室一覧
+      tags:
+      - 教室API
       responses:
         '200':
-          description: user list
+          description: 一覧
           content:
             application/json:
               schema:
                 type: array
                 items:
                   type: object
+                  required:
+                  - name
+                  - address
+                  properties:
+                    name:
+                      type: string
+                    address:
+                      type: string
+    post:
+      summary: 教室登録
+      tags:
+      - 教室API
+      parameters: []
+      responses:
+        '200':
+          description: 教室登録結果
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  user:
+                    type: object
+                    required:
+                    - name
+                    - address
+                    properties:
+                      name:
+                        type: string
+                      address:
+                        type: string
+                required:
+                - success
+                - school
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - name
+              - address
+              properties:
+                name:
+                  type: string
+                address:
+                  type: string
+  "/api/v1/schools/{id}":
+    patch:
+      summary: 教室編集
+      tags:
+      - 教室API
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: 教室編集結果
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  school:
+                    type: object
+                    required:
+                    - name
+                    - address
+                    properties:
+                      name:
+                        type: string
+                      address:
+                        type: string
+                required:
+                - success
+                - school
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - name
+              - address
+              properties:
+                name:
+                  type: string
+                address:
+                  type: string
+    delete:
+      summary: 教室削除
+      tags:
+      - 教室API
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: 教室削除結果
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  school:
+                    type: object
+                    required:
+                    - name
+                    - address
+                    properties:
+                      name:
+                        type: string
+                      address:
+                        type: string
+                required:
+                - success
+                - school
+  "/api/v1/users":
+    get:
+      summary: ユーザー一覧
+      tags:
+      - ユーザーAPI
+      responses:
+        '200':
+          description: 一覧
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  required:
+                  - name
+                  - email
                   properties:
                     name:
                       type: string
                     email:
                       type: string
-                  required:
-                  - name
-                  - email
+    post:
+      summary: ユーザー登録
+      tags:
+      - ユーザーAPI
+      parameters: []
+      responses:
+        '200':
+          description: ユーザー登録結果
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  user:
+                    type: object
+                    required:
+                    - name
+                    - email
+                    properties:
+                      name:
+                        type: string
+                      email:
+                        type: string
+                required:
+                - success
+                - user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - name
+              - email
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+  "/api/v1/users/{id}":
+    patch:
+      summary: ユーザー編集
+      tags:
+      - ユーザーAPI
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ユーザー編集結果
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  user:
+                    type: object
+                    required:
+                    - name
+                    - email
+                    properties:
+                      name:
+                        type: string
+                      email:
+                        type: string
+                required:
+                - success
+                - user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - name
+              - email
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+    delete:
+      summary: ユーザー削除
+      tags:
+      - ユーザーAPI
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ユーザー削除結果
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  user:
+                    type: object
+                    required:
+                    - name
+                    - email
+                    properties:
+                      name:
+                        type: string
+                      email:
+                        type: string
+                required:
+                - success
+                - user
 servers:
-- url: https://{defaultHost}
+- url: http://{defaultHost}
   variables:
     defaultHost:
-      default: www.example.com
+      default: localhost:3000

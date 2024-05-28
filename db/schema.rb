@@ -10,7 +10,41 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_27_235622) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_28_070304) do
+  create_table "schools", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "address"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "user_school_admins", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "school_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["school_id"], name: "index_user_school_admins_on_school_id"
+    t.index ["user_id"], name: "index_user_school_admins_on_user_id"
+  end
+
+  create_table "user_students", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "school_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["school_id"], name: "index_user_students_on_school_id"
+    t.index ["user_id"], name: "index_user_students_on_user_id"
+  end
+
+  create_table "user_teachers", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "school_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["school_id"], name: "index_user_teachers_on_school_id"
+    t.index ["user_id"], name: "index_user_teachers_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name", null: false
     t.string "email", null: false
