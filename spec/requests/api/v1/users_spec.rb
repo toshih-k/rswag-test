@@ -1,17 +1,19 @@
+# frozen_string_literal: true
+
 require 'swagger_helper'
 
-RSpec.describe "Api::V1::Users", type: :request do
-  let (:user) {
+RSpec.describe 'Api::V1::Users', type: :request do
+  let(:user) do
     FactoryBot.build(:user)
-  }
+  end
 
   user_schema = {
     type: :object,
-    required: [:name, :email],
+    required: %i[name email],
     properties: {
       name: { type: :string },
       email: { type: :string }
-    },
+    }
   }
 
   path '/api/v1/users' do
@@ -32,23 +34,23 @@ RSpec.describe "Api::V1::Users", type: :request do
       parameter name: :user, in: :body, schema: user_schema
       response 200, 'ユーザー登録結果' do
         schema type: :object,
-          properties: {
-            success: { type: :boolean },
-            user: user_schema
-          },
-          required: [:success, :user]
+               properties: {
+                 success: { type: :boolean },
+                 user: user_schema
+               },
+               required: %i[success user]
         run_test!
       end
     end
   end
 
   path '/api/v1/users/{id}' do
-    let (:user) {
+    let(:user) do
       FactoryBot.create(:user)
-    }
-    let(:id) {
+    end
+    let(:id) do
       user.id
-    }
+    end
     patch 'ユーザー編集' do
       tags 'ユーザーAPI'
       consumes 'application/json'
@@ -57,11 +59,11 @@ RSpec.describe "Api::V1::Users", type: :request do
       parameter name: :user, in: :body, schema: user_schema
       response 200, 'ユーザー編集結果' do
         schema type: :object,
-          properties: {
-            success: { type: :boolean },
-            user: user_schema
-          },
-          required: [:success, :user]
+               properties: {
+                 success: { type: :boolean },
+                 user: user_schema
+               },
+               required: %i[success user]
         run_test!
       end
     end
@@ -73,11 +75,11 @@ RSpec.describe "Api::V1::Users", type: :request do
       parameter name: :id, in: :path, type: :string
       response 200, 'ユーザー削除結果' do
         schema type: :object,
-          properties: {
-            success: { type: :boolean },
-            user: user_schema
-          },
-          required: [:success, :user]
+               properties: {
+                 success: { type: :boolean },
+                 user: user_schema
+               },
+               required: %i[success user]
         run_test!
       end
     end

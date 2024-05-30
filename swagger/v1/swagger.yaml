@@ -9,6 +9,13 @@ paths:
       summary: 教室一覧
       tags:
       - 教室API
+      description: |2+
+
+        # 教室の一覧を取得する
+
+        aaaaa
+        bbbb
+
       responses:
         '200':
           description: 一覧
@@ -30,6 +37,7 @@ paths:
       summary: 教室登録
       tags:
       - 教室API
+      description: 教室を登録する
       parameters: []
       responses:
         '200':
@@ -147,6 +155,65 @@ paths:
                 required:
                 - success
                 - school
+  "/api/v1/sessions":
+    post:
+      summary: ログイン
+      tags:
+      - セッション管理
+      description: ログインする
+      parameters: []
+      responses:
+        '200':
+          description: ログイン結果
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                required:
+                - success
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+              - email
+              - password
+    get:
+      summary: ログイン情報取得
+      tags:
+      - セッション管理
+      description: ログインユーザーの情報を取得する
+      security:
+      - Bearer: {}
+      responses:
+        '200':
+          description: ログイン結果
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  user:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      email:
+                        type: string
+                required:
+                - success
+                - user
   "/api/v1/users":
     get:
       summary: ユーザー一覧
@@ -295,3 +362,4 @@ servers:
   variables:
     defaultHost:
       default: localhost:3000
+...

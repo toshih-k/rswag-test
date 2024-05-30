@@ -40,6 +40,9 @@ gem 'rswag-api'
 gem 'rswag-ui'
 
 group :development, :test do
+  # https://github.com/rubocop/rubocop
+  gem 'rubocop', require: false
+
   # https://github.com/rspec/rspec-rails
   gem 'rspec-rails'
   gem 'rswag-specs'
